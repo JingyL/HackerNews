@@ -29,6 +29,9 @@ a:hover {
   text-decoration: underline;
 }
 
+.starChangeColor {
+color: rgb(156, 32, 4);
+}
 
 /* Site layout */
 
