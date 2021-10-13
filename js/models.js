@@ -29,13 +29,13 @@ class Story {
   }
 }
 
-
 /******************************************************************************
  * List of Story instances: used by UI to show story lists in DOM.
  */
 
 class StoryList {
   constructor(stories) {
+    // stories: [new Story({ storyId, title, author, url, username, createdAt })]
     this.stories = stories;
   }
 
@@ -58,10 +58,9 @@ class StoryList {
       url: `${BASE_URL}/stories`,
       method: "GET",
     });
-
     // turn plain old story objects from API into instances of Story class
     const stories = response.data.stories.map(story => new Story(story));
-
+    console.log(stories);
     // build an instance of our own class using the new array of stories
     return new StoryList(stories);
   }
@@ -73,8 +72,19 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
+  async addStory( user, newStory) {
     // UNIMPLEMENTED: complete this function!
+        const token = user.loginToken;
+        const response = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories',
+        { "token": token, "story": newStory });
+    
+        console.log("post" + JSON.stringify(response.data));
+        const addStory = new Story(response.data.story);
+        this.stories.unshift(addStory);
+        console.log(addStory)
+        console.log(this.stories)
+        // user.ownStories.unshift(addStory);
+        return addStory;
   }
 }
 
@@ -109,6 +119,24 @@ class User {
     this.loginToken = token;
   }
 
+
+
+
+  //add favorite stories
+
+  async addFavorite(user, storyId) {
+    const token = user.loginToken;
+    const username = user.username;
+    const response = await axios.post(`${BASE_URL}/users/${username}/favorites/${storyId}`,
+    { "token": token});
+    console.log(response.data)
+    // user.favorites.push(response.data.user.favorites);
+    console.log(user.favorites);
+}
+
+
+
+
   /** Register new user in API, make User instance & return it.
    *
    * - username: a new username
@@ -125,6 +153,7 @@ class User {
 
     let { user } = response.data
 
+    console.log(user);
     return new User(
       {
         username: user.username,
