@@ -17,6 +17,31 @@
 }
 
 
+.favorite-stories-list {
+    margin: 20px 5px;
+}
+
+
+.favorite-stories-list > li {
+    color: gray;
+    font-size: 0.8rem;
+    margin: 10px 0;
+  }
+  
+
+
+.user-stories-list {
+    margin: 20px 5px;
+}
+
+
+.user-stories-list > li {
+    color: gray;
+    font-size: 0.8rem;
+    margin: 10px 0;
+  }
+  
+
 /* Individual stories */
 
 .story-link {
