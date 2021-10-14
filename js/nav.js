@@ -6,10 +6,10 @@
 
 /** Show main list of all stories when click site name */
 
-function navAllStories(evt) {
+async function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
-  putStoriesOnPage();
+  await getAndShowStoriesOnStart() 
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -36,10 +36,12 @@ function updateNavOnLogin() {
 }
 
 $body.on("click", "#submit", function(){
-    $('.submit-form').show();
+    $submitStories.show();
+    $favStories.hide();
 });
 
 $body.on("click", "#favorites", function(){
     $allStoriesList.hide();
+    $submitStories.hide();
     $favStories.show()
 });

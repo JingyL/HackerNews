@@ -75,7 +75,7 @@ class StoryList {
   async addStory( user, newStory) {
     // UNIMPLEMENTED: complete this function!
         const token = user.loginToken;
-        const response = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories',
+        const response = await axios.post(`${BASE_URL}/stories`,
         { "token": token, "story": newStory });
     
         console.log("post" + JSON.stringify(response.data));
@@ -86,6 +86,7 @@ class StoryList {
         // user.ownStories.unshift(addStory);
         return addStory;
   }
+
 }
 
 
@@ -124,19 +125,36 @@ class User {
 
   //add favorite stories
 
-  async addFavorite(user, storyId) {
-    const token = user.loginToken;
-    const username = user.username;
-    const response = await axios.post(`${BASE_URL}/users/${username}/favorites/${storyId}`,
-    { "token": token});
-    console.log(response.data)
-    // user.favorites.push(response.data.user.favorites);
-    console.log(user.favorites);
+  async addFavorite(storyId) {
+    const response = await axios.post(`${BASE_URL}/users/${this.username}/favorites/${storyId}`,
+    { "token": this.loginToken});
+    console.log("added? " + this.favorites);
+    // console.log("addFav" +JSON.stringify(response.data))
+    // this.favorites.forEach(function(each){
+    //     console.log("addFav" + JSON.stringify(each));
+    // })
 }
 
 
+async deleteFavorite(storyId) {
+    const response = await axios.delete(`${BASE_URL}/users/${this.username}/favorites/${storyId}`,
+    { data: {"token": this.loginToken}});
+    console.log("deleteFav" +response.data)
+    console.log("deleteFav" +this.favorites);
+}
 
+async deleteStory(storyId) {
+    // UNIMPLEMENTED: complete this function!
+        const response = await axios.delete(`${BASE_URL}/stories/${storyId}`,
+        { data: {"token": this.loginToken}});
+        const deleteStory = new Story(response.data.story);
 
+        this.ownStories.shift(deleteStory);
+        console.log(response.data.story)
+        console.log(this.ownStories)
+        // user.ownStories.unshift(addStory);
+        // return deleteStory;
+  }
   /** Register new user in API, make User instance & return it.
    *
    * - username: a new username
