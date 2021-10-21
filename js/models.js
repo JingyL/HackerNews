@@ -129,7 +129,7 @@ class User {
   async addFavorite(storyId) {
     const response = await axios.post(`${BASE_URL}/users/${this.username}/favorites/${storyId}`,
     { "token": this.loginToken});
-    console.log("added? " + this.favorites);
+    console.log("added? ", this.favorites);
     // console.log("addFav" +JSON.stringify(response.data))
     // this.favorites.forEach(function(each){
     //     console.log("addFav" + JSON.stringify(each));

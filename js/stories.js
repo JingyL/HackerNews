@@ -116,7 +116,7 @@ async function putFavStoriesOnPage() {
     await checkForRememberedUser();
     if (currentUser) {
         let favstories = currentUser.favorites;
-        console.log("fav" + favstories)
+        console.log("fav" , favstories)
     for (let story of favstories){
         const $favstory = await generateMarkup(story);
         $favStories.append($favstory);
@@ -162,7 +162,7 @@ async function submitStories() {
 }
 
 // submit stories
-$("#submitBtn").on("click", async function (e) {
+$("#submit-form").on("submit", async function (e) {
     e.preventDefault();
     await submitStories();
     $submitStories.hide();
@@ -193,7 +193,7 @@ $body.on('click', ".star", async function (e) {
         if (currentUser) {
             await currentUser.addFavorite(storyId);
             getAndShowStoriesOnStart()
-            console.log("curr"+ currentUser.favorites);
+            console.log("curr", currentUser.favorites);
         }
 })
 
