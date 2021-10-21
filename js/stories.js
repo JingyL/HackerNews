@@ -166,7 +166,6 @@ $("#submitBtn").on("click", async function (e) {
     e.preventDefault();
     await submitStories();
     $submitStories.hide();
-
 });
 
 // delete stories
@@ -193,6 +192,7 @@ $body.on('click', ".star", async function (e) {
         await checkForRememberedUser();
         if (currentUser) {
             await currentUser.addFavorite(storyId);
+            getAndShowStoriesOnStart()
             console.log("curr"+ currentUser.favorites);
         }
 })
