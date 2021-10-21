@@ -47,19 +47,19 @@
     <!-- submit form -->
     <setion class="submit-form-container">
 
-        <form action="#" class="submit-form hidden" method="post">
+        <form action="#" id="submit-form" class="submit-form hidden" method="post">
             <h4>Submit stories</h4>
             <div class="authorName">
                 <label for="author">author name</label>
-                <input type="text" id="author" placeholder="author name">
+                <input type="text" id="author" placeholder="author name" minlength="5" required>
             </div>
             <div class="titleName">
                 <label for="title">story title</label>
-                <input type="text" id="title" placeholder="story title">
+                <input type="text" id="title" placeholder="story title" required>
             </div>
             <div class="urlLink">
                 <label for="url">url</label>
-                <input type="url" id="url" placeholder="url">
+                <input type="url" id="url" placeholder="url" required>
             </div>
             <button type="submit" id="submitBtn">Submit</button>
             <hr>
